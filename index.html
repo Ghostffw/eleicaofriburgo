@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Eleições 2024 Friburgo</title>
+</head>
+<script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+        let votos = {
+            "50": 0,
+            "28": 0,  
+            "15": 0,
+            "40": 0,
+            "45": 0,
+        };
+        let display1 = true;
+        let imagem = document.getElementById("imagem");
+        let display2 = true;
+        let nome = document.getElementById("nome");
+            function exibirValor(valor) {
+                let audio = new Audio();
+                audio.src = "audios/numeros.mp3";
+                audio.play();
+
+                if (display1) {
+                    document.getElementById("display").innerText = "" + valor;
+                    display1 = false;
+                } else {
+                    document.getElementById("display2").innerText = ""+ valor;
+                    display2 = true;
+                    attimagem();
+                }
+            }
+
+            function mostrar() {
+                const votosElemento = document.getElementById("votos");
+                votosElemento.innerHTML = ""; // Limpar conteúdo anterior
+                for (let candidato in votos) {
+                    if (votos.hasOwnProperty(candidato)) {
+                        votosElemento.innerHTML += `${candidato}: ${votos[candidato]} votos<br>`;
+                    };
+                };
+            };
+    
+            function attimagem() {
+                const display1Val = document.getElementById("display").innerText;
+                const display2Val = document.getElementById("display2").innerText;
+                if (display1Val == "5" && display2Val == "0") {
+                    imagem.src = "imagem/boulos.jfif";
+                    nome.textContent = "Candidato: Pedro Tortas";
+                    part.textContent = "Partido: PSOL";
+                    part.style.display = "block";
+                    nome.style.display = "block";
+                    imagem.style.display = "block";
+
+                } else if (display1Val == "2" && display2Val == "8") {
+                    imagem.src = "imagem/marca.webp";
+                    nome.textContent = "Candidato: Mateus sem Çal";
+                    part.textContent = "Partido: PRTB";
+                    part.style.display = "block";
+                    nome.style.display = "block";
+                    imagem.style.display = "block";
+
+                } else if (display1Val == "1" && display2Val == "5") {
+                    imagem.src = "imagem/Rircado.webp";
+                    nome.textContent = "Candidato: Richard Nunes";
+                    part.textContent = "Partido: MDB";
+                    part.style.display = "block";
+                    nome.style.display = "block";
+                    imagem.style.display = "block";
+                    
+                } else if (display1Val == "4" && display2Val == "0") {
+                    imagem.src = "imagem/Tabata.jpg";
+                    nome.textContent = "Candidato: Batata";
+                    part.textContent = "Partido: PSB"
+                    part.style.display = "block";
+                    nome.style.display = "block";
+                    imagem.style.display = "block";
+
+                } else if (display1Val == "4" && display2Val == "5") {
+                    imagem.src = "imagem/Datena.jfif";
+                    nome.textContent = "Candidato: Antena";
+                    part.textContent = "Partido: PSDB";
+                    part.style.display = "block";
+                    nome.style.display = "block";
+                    imagem.style.display = "block";
+
+                } else {
+                    imagem.style.display = "none";
+                    nome.style.display = "none";
+                }
+            }
+
+            function Corrige() {
+                let corrigau = new Audio();
+                corrigau.src = "audios/corrige.mp3";
+                corrigau.play();
+
+                document.getElementById("display").innerText = "";
+                document.getElementById("display2").innerText = "";
+                display1 = true;
+                imagem.style.display = "none";
+                nome.style.display = "none";
+                part.style.display = "none";
+                
+            }
+
+            function confirmarVoto() {
+                let somconfirma = new Audio();
+                somconfirma.src = "confirma.mp3";
+                somconfirma.play();
+
+                const display1Valor = document.getElementById("display").innerText;
+                const display2Valor = document.getElementById("display2").innerText;
+                const voto = display1Valor + display2Valor; // Concatenar os dois valores
+
+                if (votos.hasOwnProperty(voto)) {
+                    votos[voto] += 1; // Aumentar o número de votos para o candidato
+                    alert("Voto confirmado");
+                } else {
+                    votos["50"] += 1;
+                    votos["28"] += 1;
+                    alert("Voto Nulo");
+                }
+
+                Corrige(); // Limpar os displays após confirmar
+            };
+
+
+            document.querySelector('.Confirma').addEventListener('click', confirmarVoto);
+            document.querySelector('.Corrigir').addEventListener('click', Corrige);
+            document.querySelector('.Mostrar').addEventListener('click', mostrar);
+            document.querySelector('.Branco').addEventListener('click', confirmarVoto);
+
+            const botoesNumericos = document.querySelectorAll('.b1, .b2, .b3, .b4, .b5, .b6, .b7, .b8, .b9, .b0');
+            botoesNumericos.forEach(botao => {
+                botao.addEventListener('click', (event) => {
+                    exibirValor(event.target.innerText);
+                });
+            });
+    });
+
+    
+</script>
+<body>
+    <div id="display"></div>
+    <div id="display2"></div>
+
+    <div id="votos"></div>
+
+    <p id="nome" style="display: none;">Mateus sem Çal</p>
+    <p id="part" style="display: none;">MMMM</p>
+
+    <img id = "imagem" src="imagem/boulos.jfif" style="display: none;">
+
+    <button class="buttão Confirma" onclick="confirmaVoto()">Confirma</button>
+    <button class="buttão Corrigir"onclick="Corrige()">Corrige</button>
+    <button class="buttão Branco" onclick="confirmaVoto()">Branco</button>
+    <button class="buttão Mostrar" onclick="mostrar()"> mostrar</button>
+
+
+
+    <button class="buttão b1" onclick="exibirValor(1)">1</button>
+    <button class="buttão b2" onclick="exibirValor(2)">2</button>
+    <button class="buttão b3" onclick="exibirValor(3)">3</button>
+    <button class="buttão b4" onclick="exibirValor(4)">4</button>
+    <button class="buttão b5" onclick="exibirValor(5)">5</button>
+    <button class="buttão b6" onclick="exibirValor(6)">6</button>
+    <button class="buttão b7" onclick="exibirValor(7)">7</button>
+    <button class="buttão b8" onclick="exibirValor(8)">8</button>
+    <button class="buttão b9" onclick="exibirValor(9)">9</button>
+    <button class="buttão b0" onclick="exibirValor(0)">0</button>
+</body>
+
+</html>
