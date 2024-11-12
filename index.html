@@ -119,11 +119,9 @@
 
                 if (votos.hasOwnProperty(voto)) {
                     votos[voto] += 1; // Aumentar o número de votos para o candidato
-                    alert("Voto confirmado");
                 } else {
                     votos["50"] += 1;
                     votos["28"] += 1;
-                    alert("Voto Nulo");
                 }
 
                 Corrige(); // Limpar os displays após confirmar
