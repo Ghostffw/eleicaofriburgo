@@ -1,4 +1,0 @@
-
-
-ngrok config add-authtoken 2jw2KkX1vPqSx8IyWm003XREkd9_32guK35w9DFk5FHtee8Ss
-ngrok http http://localhost:8080
